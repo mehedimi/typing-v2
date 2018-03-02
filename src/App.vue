@@ -15,7 +15,8 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+  $fontFamily : "Operator Mono Bold";
   .container{
     max-width: 1000px;
     margin: auto;
