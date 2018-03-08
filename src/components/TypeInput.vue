@@ -32,7 +32,7 @@
 				
 				this.$parent.$emit('updateWordStatus', status ? 'correct' : 'warning');
 			},
-			changeWord(e){
+			changeWord(){
 				this.$parent.$emit('changeTypingPosition')
 				this.word = ''
 				let status = this.validateWord(this.correctWord.name + ' ', this.word)
@@ -42,6 +42,12 @@
 				let regex = `^${typingWord}.*$`
 				return new RegExp(regex).test(correctWord)
 			},
+			
+		},
+		watch: {
+			typeStarted(status){
+				this.$parent.$emit('changeTypingStatus', status)
+			}
 		}
 	}
 </script>
@@ -59,7 +65,6 @@
 			box-sizing: border-box;
 			border: 1px solid #ddd;
 			font-size: 19px;
-			font-family: "Operator Mono Book";
 			transition: 0.6s;
 			&:focus{
 				outline: none;

@@ -16,7 +16,10 @@ export default {
 </script>
 
 <style lang="scss">
-  $fontFamily : "Operator Mono Bold";
+  @import url('https://fonts.googleapis.com/css?family=Ubuntu');
+  *{
+    font-family: 'Ubuntu', sans-serif;
+  }
   .container{
     max-width: 1000px;
     margin: auto;

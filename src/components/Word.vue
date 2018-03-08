@@ -1,32 +1,63 @@
 <template>
-	<span class="word" :class="word.status">{{ word.name }} </span>
+	<span class="word" :class="[word.status, (isTypingStart && currentIndex == position) ? 'typing' : '']">{{ word.name }} </span>
 </template>
 <script>
-	export default{
-		props: ['word']
+	export default {
+		props: ['word', 'position'],
+
+		data(){
+			return {
+				isTypingStart: false,
+				currentIndex: 0
+			}
+		},
+		mounted(){
+			this.$parent.$on('changeTypingStatus', (status) => {
+				this.isTypingStart = status
+			})
+			this.$parent.$on('currentPosition', (indexPosition) => {
+				this.currentIndex = indexPosition
+			})
+		}
 	}
 </script>
 
 <style lang="scss">
 	.word{
 		color: #fff;
-		padding: 10px;
 		display: inline-block;
-		margin: 10px 0;
+		margin: 5px;
+		color: #353b48;
+		border-bottom: 2px solid transparent;
 		&.initial{
-			//background-color: #2d3436;
+			opacity: 0.8;
 		}
 		&.warning{
-			background-color: #f39c12;
+			color: #f39c12;
 		}
 		&.wrong{
-			background-color: #b71540;
+			color: #b71540;
 		}
 		&.correct{
-			background-color: #3498db;
+			color: #3498db;
 		}
 		&.complete{
-			background-color: #1abc9c;	
+			color: #1abc9c;	
+		}
+		&.typing{
+			border-color: #000;
+			animation: pulseBorder 1.5s infinite;
+		}
+	}
+	@keyframes pulseBorder {
+		0%{
+			border-color: #fff;
+		}
+		50%{
+			border-color: #000
+		}
+		100%{
+			border-color: #fff
 		}
 	}
 </style>

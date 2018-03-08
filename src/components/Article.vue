@@ -1,7 +1,7 @@
 <template>
 	<div class="container">
 		<div class="text-content">
-			<Word v-for="(word, index) in words" :key="index" :word="word"/>
+			<Word v-for="(word, index) in words" :position="index" :key="index" :word="word"/>
 		</div>
 		<TypeInput :correct-word="currentWord"/>
 	</div>
@@ -48,6 +48,12 @@
 			currentWord(){
 				return this.words[this.currentPosition]
 			}
+		},
+		watch: {
+			currentPosition(index){
+				this.words[index].status = 'correct'
+				this.$emit('currentPosition', index)
+			}
 		}
 	}
 </script>
@@ -57,7 +63,6 @@
 		border: 1px solid #00a8ff;
 		padding: 10px;
 		font-size: 20px;
-		font-family: "Operator Mono Bold";
 		color: #7f8fa6
 	}
 </style>
