@@ -46,7 +46,7 @@
 		}
 		&.typing{
 			border-color: #000;
-			animation: pulseBorder 1.5s infinite;
+			animation: pulseBorder 0.7s infinite;
 		}
 	}
 	@keyframes pulseBorder {

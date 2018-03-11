@@ -17,6 +17,11 @@
 				typeStarted: false
 			}
 		},
+		mounted(){
+			this.$parent.$on('typingFinished', () => {
+				this.typeStarted = false
+			})
+		},
 		methods: {
 			typing(e){
 				if(!this.typeStarted){
