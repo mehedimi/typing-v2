@@ -51,6 +51,9 @@
 		},
 		watch: {
 			typeStarted(status){
+				if(status){
+					this.$eventHub.$emit('typingStarted')
+				}
 				this.$parent.$emit('changeTypingStatus', status)
 			}
 		}
